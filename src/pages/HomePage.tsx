@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Seo } from '../components/Seo';
 import { IconWhatsApp } from '../components/SocialBrandIcons';
 import { ProductCardImage } from '../components/ProductCardImage';
+import { BestSellers } from '../components/BestSellers';
 import {
   ADDRESS_SCHEMA,
   GOOGLE_MAPS_URL,
@@ -619,6 +620,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <BestSellers />
 
       <section
         id="produtos"
