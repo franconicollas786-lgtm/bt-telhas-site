@@ -1,0 +1,17 @@
+# Apache (HostGator): envia rotas do SPA para index.html. Ajuste RewriteBase se o site
+# estiver em subpasta (ex.: /loja/ → RewriteBase /loja/)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # Open Graph — nunca redirecionar para index.html
+  RewriteRule ^og-image\.(jpe?g|png|webp)$ - [L]
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/jpeg .jpg .jpeg
+  AddType image/png .png
+</IfModule>

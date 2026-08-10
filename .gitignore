@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+bttelhas-deploy.zip
+bttelhas.zip
+.env*
+!.env.example
+
+# Controle interno — lista de produtos (não versionar)
+public/CATALOGO-ITENS-POR-SECAO.txt
