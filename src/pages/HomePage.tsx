@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { products, Category } from '../data';
+import type { Category, Product } from '../data';
+import { useCatalog } from '../useCatalog';
 import {
   ShoppingCart,
   ChevronRight,
@@ -33,21 +34,12 @@ import {
   PRICE_CONSULT_LABEL,
 } from '../site';
 
-const categories: Category[] = [
-  'Forros',
-  'Telhas',
-  'Ripados e Painéis',
-  'Rodapés',
-  'Acabamentos',
-  'Acessórios e Diversos',
-];
-
 type CatalogItem = {
   id: string;
   name: string;
   description?: string;
   category: Category;
-  variants: (typeof products)[number][];
+  variants: Product[];
 };
 
 const PRODUCT_GROUPS: { id: string; name: string; productIds: string[] }[] = [
@@ -87,6 +79,8 @@ const GOOGLE_REVIEWS = [
 
 export default function HomePage() {
   const location = useLocation();
+  const { catalog } = useCatalog();
+  const { products, categories, settings } = catalog;
   const [activeCategory, setActiveCategory] = useState<Category>('Forros');
   const [catalogSearch, setCatalogSearch] = useState('');
   const [availabilitySelection, setAvailabilitySelection] = useState<string[]>([]);
@@ -120,7 +114,7 @@ export default function HomePage() {
   const filteredProducts = useMemo(() => {
     const q = catalogSearch.trim().toLowerCase();
 
-    const matchesQuery = (p: (typeof products)[number]) => {
+    const matchesQuery = (p: Product) => {
       if (!q) return true;
       const name = p.name.toLowerCase();
       const desc = (p.description ?? '').toLowerCase();
@@ -141,7 +135,7 @@ export default function HomePage() {
 
     // Sem busca: apenas a categoria selecionada na aba.
     return products.filter((p) => p.category === activeCategory);
-  }, [activeCategory, catalogSearch]);
+  }, [activeCategory, catalogSearch, products]);
 
   const filteredCatalogItems = useMemo<CatalogItem[]>(() => {
     const grouped = new Map<string, CatalogItem>();
@@ -276,7 +270,7 @@ export default function HomePage() {
           if (!product) return null;
           return { product, qty };
         })
-        .filter((entry): entry is { product: (typeof products)[number]; qty: number } => entry !== null)
+        .filter((entry): entry is { product: Product; qty: number } => entry !== null)
         .sort((a, b) => a.product.name.localeCompare(b.product.name, 'pt-BR')),
     [cartItems],
   );
@@ -482,7 +476,7 @@ export default function HomePage() {
 
       <section className="relative min-h-[480px] overflow-hidden bg-gray-900 lg:min-h-[680px]">
         <img
-          src="/hero-image.png"
+          src={settings.hero_image || '/hero-image.png'}
           alt=""
           className="absolute inset-0 h-full w-full object-cover object-[70%_35%] lg:object-right"
           fetchPriority="high"
@@ -513,8 +507,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               className="mt-4 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-6xl xl:text-7xl"
             >
-              Forros, telhas e painéis{" "}
-              <span className="text-[#8cc63f]">em PVC</span> para sua obra.
+              {settings.hero_title || 'Forros, telhas e painéis em PVC para sua obra.'}
             </motion.h1>
 
             <motion.p
@@ -522,7 +515,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               className="mt-3 text-base leading-relaxed text-white/80 sm:mt-4 sm:text-lg lg:max-w-xl lg:text-xl"
             >
-              Entrega rápida, preço justo e atendimento de qualidade para Cabo Frio e Região dos Lagos.
+              {settings.hero_subtitle || 'Entrega rápida, preço justo e atendimento de qualidade para Cabo Frio e Região dos Lagos.'}
             </motion.p>
           </div>
 
@@ -621,7 +614,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <BestSellers />
+      <BestSellers products={products} />
 
       <section
         id="produtos"

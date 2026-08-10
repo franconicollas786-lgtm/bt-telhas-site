@@ -1,15 +1,10 @@
-import { products } from '../data';
+import type { Product } from '../data';
 import { ProductCardImage } from './ProductCardImage';
 import { IconWhatsApp } from './SocialBrandIcons';
 import { waUrl } from '../site';
 
-// Curadoria manual até o painel admin trazer a marcação "mais vendido" do banco de dados.
-const BEST_SELLER_IDS = ['f1', 'f9', 't1', 't8', 'r1', 'ro1', 'ac1', 'ad1'];
-
-export function BestSellers() {
-  const items = BEST_SELLER_IDS.map((id) => products.find((p) => p.id === id)).filter(
-    (p): p is (typeof products)[number] => Boolean(p),
-  );
+export function BestSellers({ products }: { products: Product[] }) {
+  const items = products.filter((p) => p.isBestSeller);
 
   if (items.length === 0) return null;
 

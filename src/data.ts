@@ -10,6 +10,8 @@ export interface Product {
   imageUrl?: string;
   /** URLs públicas para variações/galeria do produto (ex.: arquivos com sufixo -2). */
   imageUrls?: string[];
+  /** Vem da API do painel admin; ausente nos dados fixos abaixo (fallback offline). */
+  isBestSeller?: boolean;
 }
 
 export const products: Product[] = [
