@@ -35,6 +35,7 @@ export function ProductCardImage({ product, expanded = false }: Props) {
         alt={product.name}
         className="h-full w-full object-cover transition-transform duration-150 group-hover:scale-[1.03]"
         decoding="async"
+        loading="lazy"
         onError={() => setFailed(true)}
       />
       <img
@@ -43,6 +44,7 @@ export function ProductCardImage({ product, expanded = false }: Props) {
         aria-hidden="true"
         className="pointer-events-none absolute left-2 top-2 h-10 w-auto opacity-45 md:h-12"
         decoding="async"
+        loading="lazy"
       />
     </div>
   );

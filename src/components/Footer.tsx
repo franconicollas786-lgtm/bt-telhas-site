@@ -4,7 +4,7 @@ import { IconFacebook, IconInstagram, IconWhatsApp } from './SocialBrandIcons';
 import { ADDRESS_FULL, GOOGLE_MAPS_URL, PHONE_DISPLAY, SITE_NAME, facebookHref, instagramHref, waUrl } from '../site';
 
 const iconWrap =
-  'flex h-7 w-7 items-center justify-center rounded-full bg-gray-50 text-gray-600 transition-colors hover:bg-[#8cc63f] hover:text-white';
+  'flex h-11 w-11 items-center justify-center rounded-full bg-gray-50 text-gray-600 transition-colors hover:bg-brand-ink hover:text-white';
 
 export function Footer() {
   return (
@@ -30,14 +30,14 @@ export function Footer() {
             </p>
             <div className="mb-2 max-w-md">
               <p className="mb-1 flex items-start gap-2 text-xs leading-snug text-gray-700">
-                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#8cc63f]" aria-hidden />
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-ink" aria-hidden />
                 <span>{ADDRESS_FULL}</span>
               </p>
               <a
                 href={GOOGLE_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full border border-[#8cc63f] bg-white px-2.5 py-1 text-xs font-semibold text-[#8cc63f] transition-colors hover:bg-[#8cc63f] hover:text-white"
+                className="inline-flex items-center gap-1 rounded-full border border-brand-ink bg-white px-2.5 py-1 text-xs font-semibold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
               >
                 <ExternalLink className="h-3 w-3" aria-hidden />
                 Ver no mapa
@@ -72,27 +72,27 @@ export function Footer() {
             <h2 className="mb-2 text-xs font-bold text-gray-900">Navegação</h2>
             <ul className="space-y-1">
               <li>
-                <Link to="/#produtos" className="text-xs text-gray-500 transition-colors hover:text-[#8cc63f]">
+                <Link to="/#produtos" className="text-xs text-gray-500 transition-colors hover:text-brand-ink">
                   Catálogo de produtos
                 </Link>
               </li>
               <li>
-                <Link to="/#sobre" className="text-xs text-gray-500 transition-colors hover:text-[#8cc63f]">
+                <Link to="/#sobre" className="text-xs text-gray-500 transition-colors hover:text-brand-ink">
                   Sobre a {SITE_NAME}
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-xs text-gray-500 transition-colors hover:text-[#8cc63f]">
+                <Link to="/faq" className="text-xs text-gray-500 transition-colors hover:text-brand-ink">
                   Perguntas frequentes
                 </Link>
               </li>
               <li>
-                <Link to="/privacidade" className="text-xs text-gray-500 transition-colors hover:text-[#8cc63f]">
+                <Link to="/privacidade" className="text-xs text-gray-500 transition-colors hover:text-brand-ink">
                   Política de privacidade
                 </Link>
               </li>
               <li>
-                <Link to="/termos" className="text-xs text-gray-500 transition-colors hover:text-[#8cc63f]">
+                <Link to="/termos" className="text-xs text-gray-500 transition-colors hover:text-brand-ink">
                   Termos de uso
                 </Link>
               </li>
@@ -103,10 +103,10 @@ export function Footer() {
             <h2 className="mb-2 text-xs font-bold text-gray-900">Contato</h2>
             <ul className="space-y-2">
               <li className="flex items-start">
-                <Phone className="mr-2 mt-0.5 h-3.5 w-3.5 shrink-0 text-[#8cc63f]" aria-hidden />
+                <Phone className="mr-2 mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-ink" aria-hidden />
                 <a
                   href={waUrl()}
-                  className="text-xs text-gray-500 hover:text-[#8cc63f]"
+                  className="text-xs text-gray-500 hover:text-brand-ink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -114,14 +114,14 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-start">
-                <MapPin className="mr-2 mt-0.5 h-3.5 w-3.5 shrink-0 text-[#8cc63f]" aria-hidden />
+                <MapPin className="mr-2 mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-ink" aria-hidden />
                 <div className="text-xs text-gray-500">
                   <p className="mb-1 leading-snug">{ADDRESS_FULL}</p>
                   <a
                     href={GOOGLE_MAPS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-medium text-[#8cc63f] hover:underline"
+                    className="inline-flex items-center gap-1 font-medium text-brand-ink hover:underline"
                   >
                     <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
                     Ver no mapa

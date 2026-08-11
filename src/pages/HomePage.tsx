@@ -68,7 +68,7 @@ const GROUP_LOOKUP = PRODUCT_GROUPS.reduce<Record<string, { id: string; name: st
 
 const GOOGLE_REVIEWS = [
   { name: 'Marília Rosa', date: '7 de mai. de 2026', color: 'bg-[#EA4335]', text: 'Muito obrigado pela atenção, foi ótimo fazer a compra com vcs! Super indico, os rapazes da entrega estão de parabéns, são muito rápidos.' },
-  { name: 'Lucasantos DuBoM', date: '14 de mai. de 2026', color: 'bg-[#8cc63f]', text: 'Produtos de alta qualidade e boa durabilidade. Sempre comprei aqui e indico para todos!' },
+  { name: 'Lucasantos DuBoM', date: '14 de mai. de 2026', color: 'bg-brand-ink', text: 'Produtos de alta qualidade e boa durabilidade. Sempre comprei aqui e indico para todos!' },
   { name: 'Jacira Armond', date: '23 de mai. de 2026', color: 'bg-[#34A853]', text: 'São todos maravilhosos, principalmente os rapazes da entrega do carro branco — top, nota mil!' },
   { name: 'Luiz Fernando Ba', date: '9 de abr. de 2026', color: 'bg-[#4285F4]', text: 'Estou bem satisfeita com o atendimento do vendedor Fernando, agilidade na entrega do material, o forro é lindo e superou minhas expectativas.' },
   { name: 'Denilson Queiroz', date: '21 de abr. de 2026', color: 'bg-[#FBBC05]', text: 'Ótima experiência!! Empresa com preço justo, atendimento cordial, entrega rápida. São extremamente profissionais em tudo o que fazem.' },
@@ -380,7 +380,7 @@ export default function HomePage() {
         >
           <ShoppingCart className="h-4 w-4" aria-hidden />
           {cartItemsCount > 0 ? (
-            <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-[#8cc63f] px-1 py-0.5 text-center text-[10px] font-bold leading-none text-white">
+            <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-brand-ink px-1 py-0.5 text-center text-[10px] font-bold leading-none text-white">
               {cartItemsCount}
             </span>
           ) : null}
@@ -462,7 +462,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={openCartWhatsApp}
-                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5 text-sm font-bold text-white hover:bg-[#20bd5a]"
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp-ink px-3 py-2.5 text-sm font-bold text-white hover:bg-whatsapp-ink-hover"
                   >
                     <MessageCircle className="h-4 w-4" aria-hidden />
                     Enviar no WhatsApp
@@ -530,7 +530,7 @@ export default function HomePage() {
                 href={waUrl('Olá! Gostaria de falar com a BT Telhas.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex w-1/2 items-center justify-center gap-1 rounded-full bg-[#8cc63f] px-2 py-3.5 text-xs font-semibold text-white shadow-lg shadow-[#8cc63f]/20 transition-all hover:bg-[#7ab332] active:scale-95 sm:w-auto sm:gap-2 sm:px-7 sm:text-base"
+                className="group inline-flex w-1/2 items-center justify-center gap-1 rounded-full bg-brand-ink px-2 py-3.5 text-xs font-semibold text-white shadow-lg shadow-brand-ink/20 transition-all hover:bg-brand-ink-hover active:scale-95 sm:w-auto sm:gap-2 sm:px-7 sm:text-base"
               >
                 <IconWhatsApp className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
                 Falar no WhatsApp
@@ -657,7 +657,7 @@ export default function HomePage() {
           </div>
 
           {catalogSearch.trim() ? (
-            <p className="mb-6 rounded-xl border border-[#8cc63f]/30 bg-green-50/80 px-4 py-3 text-center text-sm text-gray-700 md:text-left">
+            <p className="mb-6 rounded-xl border border-[#8cc63f]/30 bg-green-50/80 px-4 py-3 text-center text-sm text-gray-800 md:text-left">
               Mostrando resultados em <strong className="text-gray-900">todas as categorias</strong> para “
               {catalogSearch.trim()}”. Apague o campo de busca para voltar a navegar só pelas abas.
             </p>
@@ -677,7 +677,7 @@ export default function HomePage() {
                 onClick={() => setActiveCategory(category)}
                 className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
                   activeCategory === category
-                    ? 'bg-[#8cc63f] text-white shadow-md shadow-[#8cc63f]/20'
+                    ? 'bg-brand-ink text-white shadow-md shadow-brand-ink/20'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -725,7 +725,15 @@ export default function HomePage() {
                         if (target.closest('button, input, label, a, select, option, textarea')) return;
                         setExpandedProductId((prev) => (prev === item.id ? null : item.id));
                       }}
-                      className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all hover:shadow-md ${
+                      onKeyDown={(event) => {
+                        if (event.key !== 'Enter' && event.key !== ' ') return;
+                        const target = event.target as HTMLElement;
+                        if (target.closest('button, input, label, a, select, option, textarea')) return;
+                        event.preventDefault();
+                        setExpandedProductId((prev) => (prev === item.id ? null : item.id));
+                      }}
+                      tabIndex={0}
+                      className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white shadow-sm outline-none transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-brand-ink/50 ${
                         isSelected
                           ? 'border-[#8cc63f] ring-2 ring-[#8cc63f]/40'
                           : 'border-gray-100'
@@ -746,14 +754,14 @@ export default function HomePage() {
                         <ProductCardImage product={activeVariant} expanded={isExpanded} />
                       </div>
                       <div className="relative flex flex-1 flex-col p-5 pt-4">
-                        <div className="mb-2 text-xs font-bold tracking-wider text-[#8cc63f] uppercase">{item.category}</div>
+                        <div className="mb-2 text-xs font-bold tracking-wider text-brand-ink uppercase">{item.category}</div>
                         <h3 className="mb-2 text-lg leading-tight font-bold text-gray-900">{item.name}</h3>
                         {activeVariant.description ? (
                           <p className="mb-4 line-clamp-2 text-sm text-gray-500">{activeVariant.description}</p>
                         ) : null}
                         {hasOfferRibbon ? (
                           <div className="relative mt-auto flex min-h-[2.25rem] w-full items-center justify-center overflow-visible pt-4">
-                            <span className="pointer-events-none absolute left-1/2 top-1/2 w-[min(380%,100vw)] max-w-none -translate-x-1/2 -translate-y-1/2 -rotate-[6deg] whitespace-nowrap border border-[#6f9c31] bg-[#8cc63f] px-10 py-1 text-center text-[10px] font-extrabold tracking-wider text-white uppercase shadow-md">
+                            <span className="pointer-events-none absolute left-1/2 top-1/2 w-[min(380%,100vw)] max-w-none -translate-x-1/2 -translate-y-1/2 -rotate-[6deg] whitespace-nowrap border border-brand-ink-hover bg-brand-ink px-10 py-1 text-center text-[10px] font-extrabold tracking-wider text-white uppercase shadow-md">
                               super promoção
                             </span>
                           </div>
@@ -764,7 +772,7 @@ export default function HomePage() {
                           href={waUrl(`Olá! Gostaria de solicitar um orçamento para: ${activeVariant.name}`)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex w-full items-center justify-center gap-2 rounded-full bg-[#8cc53b] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#7ab332]"
+                          className="flex w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-ink-hover"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <IconWhatsApp className="h-4 w-4" />
@@ -808,7 +816,7 @@ export default function HomePage() {
                                 <button
                                   type="button"
                                   onClick={() => updateProductQuantity(activeVariant.id, currentQty - 1)}
-                                  className="h-9 w-9 rounded-full border border-gray-300 bg-white text-lg font-bold text-gray-700"
+                                  className="h-11 w-11 rounded-full border border-gray-300 bg-white text-lg font-bold text-gray-700"
                                   aria-label={`Diminuir quantidade de ${activeVariant.name}`}
                                 >
                                   -
@@ -817,7 +825,7 @@ export default function HomePage() {
                                 <button
                                   type="button"
                                   onClick={() => updateProductQuantity(activeVariant.id, currentQty + 1)}
-                                  className="h-9 w-9 rounded-full border border-gray-300 bg-white text-lg font-bold text-gray-700"
+                                  className="h-11 w-11 rounded-full border border-gray-300 bg-white text-lg font-bold text-gray-700"
                                   aria-label={`Aumentar quantidade de ${activeVariant.name}`}
                                 >
                                   +
@@ -827,7 +835,7 @@ export default function HomePage() {
                             <button
                               type="button"
                               onClick={() => addToCart(activeVariant.id)}
-                              className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-[#8cc63f] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#7ab332]"
+                              className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-brand-ink px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-ink-hover"
                             >
                               Adicionar ao carrinho
                             </button>
@@ -872,7 +880,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={openAvailabilityWhatsApp}
-                  className="order-1 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#25D366]/30 transition-transform hover:bg-[#20bd5a] active:scale-[0.98] sm:order-2 sm:px-8"
+                  className="order-1 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-whatsapp-ink px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-whatsapp-ink/30 transition-transform hover:bg-whatsapp-ink-hover active:scale-[0.98] sm:order-2 sm:px-8"
                 >
                   <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
                   Consultar disponibilidade no WhatsApp
@@ -950,7 +958,7 @@ export default function HomePage() {
               href={GOOGLE_MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:border-[#8cc63f] hover:text-[#8cc63f]"
+              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:border-brand-ink hover:text-brand-ink"
             >
               Ver todas as avaliações no Google
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>

@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SITE_NAME, waUrl } from '../site';
 
 const navLinkClass =
-  'text-sm font-medium text-gray-600 transition-colors hover:text-[#8cc63f]';
-const departmentLinkClass = 'block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#8cc63f]';
+  'text-sm font-medium text-gray-600 transition-colors hover:text-brand-ink';
+const departmentLinkClass = 'block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-brand-ink';
 const departments = [
   { label: 'Forros', slug: 'forros' },
   { label: 'Telhas', slug: 'telhas' },
@@ -163,7 +163,7 @@ export function Header() {
               href={waUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center justify-center rounded-full bg-[#8cc63f] px-5 py-2.5 text-sm font-medium text-white shadow-md shadow-[#8cc63f]/20 transition-all hover:bg-[#7ab332] hover:shadow-lg hover:shadow-[#8cc63f]/40 lg:inline-flex"
+              className="hidden items-center justify-center rounded-full bg-brand-ink px-5 py-2.5 text-sm font-medium text-white shadow-md shadow-brand-ink/20 transition-all hover:bg-brand-ink-hover hover:shadow-lg hover:shadow-brand-ink/40 lg:inline-flex"
             >
               <Phone className="mr-2 h-4 w-4" aria-hidden />
               Fale Conosco
@@ -236,7 +236,7 @@ export function Header() {
                 href={waUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-[#8cc63f] px-5 py-3 text-sm font-medium text-white"
+                className="inline-flex items-center justify-center rounded-full bg-brand-ink px-5 py-3 text-sm font-medium text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Phone className="mr-2 h-4 w-4" aria-hidden />

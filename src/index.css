@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  /* Verde de marca: uso decorativo (fundos claros, pontos, glows) — não passa em
+     contraste AA como texto ou fundo com texto branco (2.05:1). Ver --color-brand-ink. */
+  --color-brand: #8cc63f;
+  /* Mesmo hue/saturação do brand, luminosidade reduzida — 5.28:1 tanto como texto
+     sobre branco quanto como fundo com texto branco. Usar em botões, abas ativas,
+     rótulos de categoria, links e qualquer texto/ícone que precise ler sobre branco. */
+  --color-brand-ink: #527623;
+  --color-brand-ink-hover: #45621d;
+
+  /* Mesmo tratamento para o verde do WhatsApp (#25D366 com texto branco é 1.98:1). */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-ink: #17823f;
+  --color-whatsapp-ink-hover: #136c34;
+}
+
 @font-face {
   font-family: 'Reatro Retro';
   src: url('/fonts/reatro-retro.woff2') format('woff2'),
@@ -26,18 +42,6 @@
   font-family: 'Bringbold Nineties', serif;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marquee 40s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
 
 .text-stroke {
   -webkit-text-stroke: 2px white;
@@ -65,7 +69,7 @@
     z-index: 100;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    background-color: #8cc63f;
+    background-color: #527623;
     color: #fff;
     font-weight: 600;
     text-decoration: none;
