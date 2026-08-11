@@ -26,6 +26,19 @@
   font-family: 'Bringbold Nineties', serif;
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
 .text-stroke {
   -webkit-text-stroke: 2px white;
   paint-order: stroke fill;

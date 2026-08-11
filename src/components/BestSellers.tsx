@@ -19,12 +19,14 @@ export function BestSellers({ products }: { products: Product[] }) {
             Produtos mais vendidos
           </h2>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((product) => (
+      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <div className="marquee-track flex w-max gap-6 px-4">
+          {[...items, ...items].map((product, i) => (
             <article
-              key={product.id}
-              className="flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+              key={`${product.id}-${i}`}
+              className="flex w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
             >
               <ProductCardImage product={product} />
               <div className="mt-4 flex flex-1 flex-col">
