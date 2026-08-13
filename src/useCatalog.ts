@@ -22,12 +22,14 @@ export function useCatalog(): { catalog: Catalog; loading: boolean } {
 
   useEffect(() => {
     let cancelled = false;
+    console.log('[useCatalog] useEffect disparado, buscando API...');
     fetchCatalog()
       .then((data) => {
+        console.log('[useCatalog] API retornou', data.products.length, 'produtos');
         if (!cancelled && data.products.length > 0) setCatalog(data);
       })
-      .catch(() => {
-        // mantém o fallback estático
+      .catch((err) => {
+        console.error('[useCatalog] fetch falhou:', err);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
