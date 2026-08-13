@@ -3,6 +3,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  # Força www
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
   # Open Graph — nunca redirecionar para index.html
   RewriteRule ^og-image\.(jpe?g|png|webp)$ - [L]
   RewriteRule ^index\.html$ - [L]
